@@ -10,8 +10,13 @@ public class PickUpGun : MonoBehaviour
     public GameObject gunPrefab;
     public GameObject pickUpText;
 
+    public Gun gunscript;
     bool isNear = false;
 
+    private void Start()
+    {
+        gunscript.enabled = false;
+    }
     private void Update()
     {
         if (isNear)
@@ -20,6 +25,7 @@ public class PickUpGun : MonoBehaviour
             {
                 pickUpText.SetActive(false);
                 Instantiate(gunPrefab).transform.SetParent(gunParent.transform, false);
+                gunscript.enabled = true;
                 Destroy(Empty);
             }
         }
