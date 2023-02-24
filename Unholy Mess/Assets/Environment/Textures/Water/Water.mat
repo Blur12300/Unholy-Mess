@@ -99,5 +99,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 0.44705883}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HorizonColor: {r: 0.172, g: 0.463, b: 0.435, a: 1}
-    - _RefrColor: {r: 0.31641153, g: 0.7239881, b: 0.8301887, a: 1}
+    - _RefrColor: {r: 0.61479175, g: 0.8207547, b: 0.80619705, a: 1}
   m_BuildTextureStacks: []

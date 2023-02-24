@@ -15,28 +15,25 @@ public class Gun : MonoBehaviour
     public GameObject explosionPrefab;
     public GameObject fpsCam;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float n = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.localPosition != hipPos | transform.localPosition != adsPos)
+        if (transform.localPosition != hipPos && transform.localPosition != adsPos)
         {
             transform.localPosition = hipPos;
         }
-        if (CanShoot && !isAimed && Input.GetKey(KeyCode.Mouse1))
+
+        if (!isAimed && Input.GetKey(KeyCode.Mouse1))
         {
             transform.localPosition = adsPos;
             isAimed = true;
         }
-        if (CanShoot && isAimed && !(Input.GetKey(KeyCode.Mouse1)))
+        if (isAimed && !(Input.GetKey(KeyCode.Mouse1)))
         {
             transform.localPosition = hipPos;
-            isAimed = true;
+            isAimed = false;
         }
         if (CanShoot && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -45,6 +42,7 @@ public class Gun : MonoBehaviour
     }
     async void Shoot()
     {
+        CanShoot = false;
         GetComponentInChildren<ParticleSystem>().Play();
 
         RaycastHit hit;
@@ -53,11 +51,13 @@ public class Gun : MonoBehaviour
             if (hit.collider.name != "Player")
             {
                 Instantiate(explosionPrefab, hit.point, hit.transform.rotation);
-                await System.Threading.Tasks.Task.Delay(1000);
+
+                await System.Threading.Tasks.Task.Delay(500);
+                Destroy(GameObject.Find("Explosion(Clone)"));
+                CanShoot = true;
+                await System.Threading.Tasks.Task.Delay(500);
                 Destroy(GameObject.Find("Explosion(Clone)"));
             }
         }
-
-
     }
 }
