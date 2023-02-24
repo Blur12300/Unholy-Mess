@@ -53,7 +53,7 @@ public class Gun : MonoBehaviour
             if (hit.collider.name != "Player")
             {
                 Instantiate(explosionPrefab, hit.point, hit.transform.rotation);
-                await System.Threading.Tasks.Task.Delay(500);
+                await System.Threading.Tasks.Task.Delay(1000);
                 Destroy(GameObject.Find("Explosion(Clone)"));
             }
         }
